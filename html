@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MOHA - Official character page with social links and updates" />
+  
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MOHA" />
+  <meta property="og:description" content="Official MOHA character page" />
+  <meta property="og:image" content="images/moha.png" />
+  
+  <!-- Twitter Preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MOHA" />
+  <meta name="twitter:description" content="Official MOHA character page" />
+  <meta name="twitter:image" content="images/moha.png" />
+  
+  <title>MOHA - Official Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="canvas" role="main">
+  <div class="polka-layer" aria-hidden="true"></div>
+  
+  <img 
+    src="images/character.png" 
+    class="character" 
+    alt="MOHA character illustration"
+  />
+  
+  <!-- 🔥 ADDED THIS WRAPPER - This is what was missing! -->
+  <div class="sign-and-icons-group">
+    
+    <img 
+      src="images/moha.png" 
+      class="moha-sign" 
+      alt="MOHA logo"
+    />
+    
+    <nav class="icons" aria-label="Social media links">
+      <a 
+        href="https://x.com/moha_kun333" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="icon icon-x"
+        aria-label="Follow MOHA on X (formerly Twitter)"
+      >
+        <img src="images/icon-x.png" alt="X logo" />
+      </a>
+      
+      <a 
+        href="https://www.instagram.com/moha_kun.333/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="icon icon-ig"
+        aria-label="Follow MOHA on Instagram"
+      >
+        <img src="images/icon-ig.png" alt="Instagram logo" />
+      </a>
+      
+      <button 
+        class="icon icon-question coming-soon"
+        aria-label="More content coming soon"
+        type="button"
+      >
+        <img src="images/icon-question.png" alt="Question mark icon" />
+        <span class="label" aria-hidden="true">COMING<br>SOON</span>
+      </button>
+    </nav>
+    
+  </div>
+  <!-- 🔥 CLOSING TAG FOR WRAPPER -->
+  
+</main>
+<script src="script.js"></script>
+</body>
+</html>
+// ============================================
+// MOHA SITE - JAVASCRIPT
+// ============================================
+
+// Wait for the entire page to load before running code
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // -------- COMING SOON BUTTON --------
+  const comingSoonBtn = document.querySelector('.coming-soon');
+  
+  if (comingSoonBtn) {
+    comingSoonBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Add a subtle click feedback animation
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+      
+      // Log to console (you can remove this later)
+      console.log('Coming Soon button clicked!');
+    });
+  }
+  
+  // -------- SMOOTH PAGE FADE-IN --------
+  const canvas = document.querySelector('.canvas');
+  if (canvas) {
+    canvas.style.opacity = '0';
+    canvas.style.transition = 'opacity 0.6s ease-in';
+    
+    // Fade in after a tiny delay
+    setTimeout(() => {
+      canvas.style.opacity = '1';
+    }, 100);
+  }
+  
+  // -------- TRACK SOCIAL LINK CLICKS --------
+  // This helps you see which platform people click more
+  const xLink = document.querySelector('.icon-x');
+  const igLink = document.querySelector('.icon-ig');
+  
+  if (xLink) {
+    xLink.addEventListener('click', function() {
+      console.log('User clicked X/Twitter link');
+      // Add analytics tracking here later if you want
+    });
+  }
+  
+  if (igLink) {
+    igLink.addEventListener('click', function() {
+      console.log('User clicked Instagram link');
+      // Add analytics tracking here later if you want
+    });
+  }
+  
+  // -------- IMAGE ERROR HANDLING --------
+  // If an image fails to load, log it to console
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('error', function() {
+      console.error('Failed to load image:', this.src);
+    });
+  });
+  
+});
+/* ============================================
+   MOHA SITE - FINAL CSS
+   ============================================ */
+
+/* -------- BASE STYLES -------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #d4170e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* -------- MAIN CANVAS -------- */
+.canvas {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url("images/bg.png") center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* -------- ANIMATED POLKA DOTS LAYER -------- */
+.polka-layer {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  height: 79vh;
+
+  background: url("images/polka-dots.png") repeat;
+  background-size: 1440px 1444px;
+
+  opacity: 0.8;
+  pointer-events: none;
+  animation: drift-right 70s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes drift-right {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 600px 0;
+  }
+}
+
+/* -------- CHARACTER -------- 
+.character {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 153.5vh;
+  max-width: 1190px;
+  height: auto;
+}*/
+.character {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 153.5vh;  /**/
+  height: auto;
+}
+
+/* ============================================
+   🎯 GROUPED SIGN + ICONS (ONLY CHANGE)
+   ============================================ */
+
+/* Container that groups sign and icons together */
+.sign-and-icons-group {
+  position: absolute;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  gap: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  z-index: 10;
+}
+
+/* -------- MOHA SIGN -------- */
+.moha-sign {
+  position: relative;  /* Changed from absolute */  
+  /* Responsive sizing - scales with screen width */
+  width: 50vw;         /* 60% of screen width */
+  /*max-width: 750px;     Don't exceed original size */
+  min-width: 300px;    /* Don't get too small */
+  
+  height: auto;        /* Maintain aspect ratio */
+  gap: 10px;
+  filter: drop-shadow(20px 20px 10px rgba(0, 0, 0, 0.921));
+}
+
+/* -------- SOCIAL ICONS CONTAINER -------- */
+.icons {
+  position: relative;  /* Changed from absolute */
+  display: flex;
+  justify-content: center;
+  gap: 95px;
+  pointer-events: none;
+}
+
+/* -------- INDIVIDUAL ICON BUTTONS -------- */
+.icon {
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.58, 1);
+  /*outline: 4px solid #48ff00;*/
+}
+
+
+/* Individual icon sizes */
+.icon-x img {
+  width: 11vw;
+}
+
+.icon-ig img {
+  width: 9.5vw;
+}
+
+.icon-question img {
+  width:9vw;
+}
+
+/* Icon hover effect */
+.icon:hover img {
+  transform: scale(1.2);
+  filter: drop-shadow(10px 10px 8px rgba(0, 0, 0, 0.899));
+}
+
+/* Icon images default state */
+.icons .icon img {
+  transition:
+    transform 0.3s cubic-bezier(0, 0, 0.58, 1), 
+    filter 0.3s ease-in;  
+  filter: 
+    drop-shadow(10px 10px 13px rgba(0, 0, 0, 0.822))
+    grayscale(0%);
+}
+
+/* -------- COMING SOON FEATURE -------- */
+.coming-soon {
+  position: relative;
+}
+
+.coming-soon .label {
+  position: absolute;
+  bottom: 30%;
+  right: 5px;
+  width: 100%;
+  color: rgb(255, 234, 47);
+  font-size: 25px;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  text-align: center;
+  text-shadow:
+    -2px -2px 1px black,
+     2px -2px 1px black,
+    -2px  2px 1px black,
+     2px  2px 1px black,
+     0px  2px 1px black,
+     2px  0px 1px black,
+    -2px  0px 1px black,
+     0px -2px 1px black;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.coming-soon:hover img {
+  filter: 
+    drop-shadow(10px 10px 8px rgba(0, 0, 0, 0.899)) 
+    grayscale(100%);
+  transform: scale(1.2);
+}
+
+.coming-soon:hover .label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE & TABLET
+   ============================================ */
+
+/* Tablets and smaller laptops */
+@media (max-width: 1024px) {
+  .sign-and-icons-group {
+    gap: 40px;  /* Adjusted for grouped layout */
+  }
+  
+  .icons {
+    gap: 100px;
+  }
+}
+
+/* ipad */
+@media (max-width: 850px) {
+  .character {
+    max-height: 100%;
+
+  }
+  
+  .sign-and-icons-group {
+    top: 45%;
+    gap: 25px;
+  }
+  
+  .moha-sign {
+    width: 90vw;
+  }
+  
+  .icons {
+    gap: 30%;
+  }
+  
+  .icon-x img{width: 14vh;}
+
+  .icon-ig img,
+  .icon-question img {
+    width: 13vh;
+  }
+  
+  .coming-soon .label {
+    font-size: 150%;
+    bottom: 27%;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .character {
+    max-width: 90vh;
+  }
+  
+  .sign-and-icons-group {
+    top: 45%;  /* Adjusted for tablets */
+    gap: 30px;
+  }
+  
+  .moha-sign {
+    width: 80vw;
+  }
+  
+  .icons {
+    gap: 60px;
+  }
+  
+  .icon-x img {
+    width: 14vh;
+  }
+  
+  .icon-ig img {
+    width: 12.5vh;
+  }
+  
+  .icon-question img {
+    width: 12vh;
+  }
+  
+  .coming-soon .label {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 550px) {
+  .character {
+    max-width: 70vh;
+  }
+}
+
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .character {
+    max-height: 100%;
+
+  }
+  
+  .sign-and-icons-group {
+    top: 45%;
+    gap: 25px;
+  }
+  
+  .moha-sign {
+    width: 90vw;
+  }
+  
+  .icons {
+    gap: 20px;
+  }
+  
+  .icon-x img,
+  .icon-ig img,
+  .icon-question img {
+    width: 11vh;
+  }
+  
+  .coming-soon .label {
+    font-size: 14px;
+    bottom: 18px;
+  }
+}
+
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .sign-and-icons-group {
+    top: 45%;
+    gap: 20px;
+  }
+  
+  .icons {
+    gap: 7%;
+  }
+  
+  .icon-x img,
+  .icon-ig img,
+  .icon-question img {
+    width: 10vh;
+  }
+}
+
+/* -------- ACCESSIBILITY: REDUCED MOTION -------- 
+@media (prefers-reduced-motion: reduce) {
+  .polka-layer {
+    animation: none;
+  }
+  
+  .icon:hover img,
+  .coming-soon:hover img {
+    transition: none;
+  }
+}*/
+
+/*@media (max-width: 600px) {
+  body {
+    background: green !important;
+  }
+}
